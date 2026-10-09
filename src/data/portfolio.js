@@ -2,9 +2,9 @@
 export const personalInfo = {
   brandName: 'Naj',
   fullName: 'Nathan Zoua',
-  title: 'Junior Web Developer',
-  positioning: 'I build modern, responsive and user-friendly websites and web applications.',
-  about: 'I enjoy understanding how things work, exploring modern tools and making steady progress with every project. I am continuously learning and improving my skills, with a focus on clear, accessible and useful web experiences.',
+  title: 'Full-Stack Web Developer',
+  positioning: 'I build modern web applications, from responsive interfaces to APIs and database-driven features.',
+  about: 'My work focuses on practical web products: clear user journeys, thoughtful interfaces and the backend workflows that support them. I keep developing my technical expertise through real projects and careful iteration.',
 }
 
 export const contact = {
@@ -20,16 +20,18 @@ export const socialLinks = [
   { label: 'Email', type: 'email' },
 ]
 
-// These are the skills already listed in the portfolio profile.
-// Additional and unconfirmed technologies are kept under currentlyLearning.
 export const skills = [
   {
     category: 'Frontend',
-    items: ['HTML5', 'CSS3', 'JavaScript', 'React', 'Responsive Design'],
+    items: ['HTML5', 'CSS3', 'JavaScript', 'React', 'Vite', 'Responsive Design'],
   },
   {
     category: 'Backend',
-    items: ['Node.js'],
+    items: ['Node.js', 'Express', 'Python', 'Django REST Framework', 'PHP'],
+  },
+  {
+    category: 'Data',
+    items: ['PostgreSQL', 'MySQL', 'Prisma'],
   },
   {
     category: 'Tools',
@@ -53,93 +55,140 @@ export const currentlyLearning = [
 ]
 
 export const projects = [
-  // Add real projects only. Each card supports an image, technologies,
-  // keyFeatures, liveUrl and githubUrl.
-  // {
-  //   title: 'Project name',
-  //   description: 'A short, factual description of what you built.',
-  //   technologies: ['React', 'CSS'],
-  //   keyFeatures: ['Responsive layout', 'Accessible navigation'],
-  //   image: '/images/project-preview.webp',
-  //   liveUrl: 'https://your-live-project.example',
-  //   githubUrl: 'https://github.com/your-account/your-project',
-  // },
+  {
+    id: 'smartbus',
+    title: 'SmartBus',
+    category: 'Transportation platform',
+    projectType: 'Full-stack MVP',
+    visual: 'transport',
+    description: 'A fleet and reservations management MVP pairing a responsive PHP interface with a Django REST API.',
+    technologies: ['Django REST Framework', 'MySQL', 'PHP', 'JavaScript'],
+    keyFeatures: [
+      'Searchable fleet and bus/driver administration',
+      'Reservation requests with date-overlap checks and server-side pricing',
+      'Driver location sharing after permission, with position history',
+      'Maintenance orders, sales requests and role-aware accounts',
+    ],
+    objective: 'Bring core transport operations—fleet, reservations and vehicle location—into one demonstrable application.',
+    solution: 'A PHP web interface works with a Django REST API and MySQL persistence. The project is an MVP designed for local testing, not a finished production service.',
+    architecture: 'PHP interface → Django REST Framework API → MySQL',
+    githubUrl: 'https://github.com/nathan-ZOUA/smartbus',
+    featured: true,
+  },
+  {
+    id: 'velora',
+    title: 'VELORA',
+    category: 'E-commerce platform',
+    projectType: 'Full-stack application',
+    visual: 'commerce',
+    description: 'A multi-page storefront with a broad sample catalogue, shopping flows and an Express API foundation.',
+    technologies: ['React', 'Vite', 'Express', 'Prisma', 'PostgreSQL'],
+    keyFeatures: [
+      'Product catalogue with search, category filters and sorting',
+      'Product pages, wishlist and cart saved in the browser',
+      'Checkout, account, order and admin demonstration screens',
+      'Local sample catalogue fallback when the API is unavailable',
+    ],
+    objective: 'Create an end-to-end e-commerce experience that remains explorable before a database is configured.',
+    solution: 'The React storefront provides product discovery and shopping flows. An Express API and Prisma schema prepare a PostgreSQL-backed data layer; checkout and payment remain demonstration flows.',
+    architecture: 'React + Vite storefront → Express API → Prisma → PostgreSQL',
+    githubUrl: 'https://github.com/nathan-ZOUA/VELORA',
+    featured: true,
+  },
+  {
+    id: 'educore',
+    title: 'EDUCORE',
+    category: 'Education platform',
+    projectType: 'Learning platform foundation',
+    visual: 'education',
+    description: 'A role-aware learning platform foundation for students, parents, teachers and administrators.',
+    technologies: ['React', 'Vite', 'Django REST Framework', 'PostgreSQL'],
+    keyFeatures: [
+      'Courses, enrollments, lessons and learning progress',
+      'Assignments, quizzes, examinations, grades and attendance',
+      'Role-scoped workspaces, parent-child links and notifications',
+      'Profile editing and account administration workflows',
+    ],
+    objective: 'Organize learning workflows and academic records in one application with role-aware views.',
+    solution: 'A React frontend connects to a Django REST API with server-side access scoping. The repository documents a working foundation; it is not yet a complete production SaaS.',
+    architecture: 'React + Vite frontend → Django REST Framework API → PostgreSQL configuration',
+    liveUrl: 'https://educore-lovat.vercel.app/',
+    featured: true,
+    note: 'Payment processing, email verification and several production services are not implemented.',
+  },
+  {
+    id: 'nova-business',
+    title: 'Nova Business',
+    category: 'Business web application',
+    projectType: 'Fictional demonstration concept',
+    visual: 'business',
+    description: 'A responsive React website concept presenting a fictional digital studio, its services and project process.',
+    technologies: ['React', 'JavaScript', 'CSS'],
+    keyFeatures: [
+      'Structured service and business information',
+      'Reusable React components and responsive navigation',
+      'Project inquiry and demonstration content flows',
+    ],
+    objective: 'Explore a clear digital presence for a business-oriented studio concept.',
+    solution: 'A component-based React experience organizes service information, process details and sample project concepts.',
+    architecture: 'React frontend · no business backend is claimed',
+    liveUrl: 'https://nova-business-weld.vercel.app/',
+    githubUrl: 'https://github.com/nathan-ZOUA/nova-business',
+    featured: false,
+    note: 'Nova Business is a fictional concept created as a personal demonstration project.',
+  },
+  {
+    id: 'savanna-restaurant',
+    title: 'Savanna Restaurant',
+    category: 'Restaurant website',
+    projectType: 'Fictional demonstration concept',
+    visual: 'restaurant',
+    description: 'A responsive restaurant website concept with a filterable sample menu and editorial sections.',
+    technologies: ['React', 'JavaScript', 'CSS'],
+    keyFeatures: [
+      'Sample menu filtering by category',
+      'Responsive navigation and structured content',
+      'Demonstration reservation flow and contact presentation',
+    ],
+    objective: 'Present a restaurant concept, its menu and visitor actions in a cohesive website.',
+    solution: 'A responsive React interface combines menu filtering, editorial content and a demonstration reservation flow.',
+    architecture: 'React frontend · demonstration website with sample content',
+    liveUrl: 'https://savanna-restaurant-phi.vercel.app/',
+    githubUrl: 'https://github.com/nathan-ZOUA/savanna-restaurant',
+    featured: false,
+    note: 'The restaurant, menu, prices, schedule and reservation details are fictional.',
+  },
 ]
 
 export const services = [
   {
-    title: 'Business Websites', icon: 'website',
-    description: 'A clear, well-structured website to introduce your business online.',
-    benefit: 'Give visitors a useful place to learn about your offer.',
-  },
-  {
-    title: 'Landing Pages', icon: 'landing',
-    description: 'A focused page for a product, service, event or campaign.',
-    benefit: 'Make one message and its next step easy to find.',
-  },
-  {
-    title: 'Responsive Web Design', icon: 'responsive',
-    description: 'Layouts that adapt to phones, tablets and larger screens.',
-    benefit: 'Keep content comfortable to use across screen sizes.',
-  },
-  {
-    title: 'Website Redesign', icon: 'redesign',
-    description: 'Refresh an existing site’s layout, content structure or styling.',
-    benefit: 'Bring a more consistent look and clearer page structure.',
+    title: 'Full-Stack Web Applications', icon: 'application',
+    description: 'Responsive interfaces connected to APIs and practical data workflows.',
+    benefit: 'Bring the user experience and application logic together.',
   },
   {
     title: 'React Frontend Development', icon: 'react',
-    description: 'Build reusable interface components with React.',
-    benefit: 'Make interface updates easier to organize and maintain.',
+    description: 'Reusable React interfaces built around clear, accessible user journeys.',
+    benefit: 'Create an interface that is easier to use and maintain.',
   },
   {
-    title: 'Interactive Web Applications', icon: 'application',
-    description: 'Create focused browser experiences with useful interactions.',
-    benefit: 'Help users complete common tasks in one place.',
+    title: 'Backend APIs', icon: 'api',
+    description: 'REST API development with Django REST Framework or Express.',
+    benefit: 'Connect product screens to structured application workflows.',
   },
   {
-    title: 'Dashboard & Admin Interfaces', icon: 'dashboard',
-    description: 'Organize information and controls into a practical interface.',
-    benefit: 'Make key information and actions easier to navigate.',
+    title: 'E-commerce Experiences', icon: 'website',
+    description: 'Product discovery, catalogue browsing and shopping flow interfaces.',
+    benefit: 'Make it easier for customers to find and explore products.',
   },
   {
-    title: 'API Integration', icon: 'api',
-    description: 'Connect a frontend to an available API and present its data.',
-    benefit: 'Bring relevant external or server data into your interface.',
+    title: 'Database-Driven Applications', icon: 'application',
+    description: 'Web features designed around PostgreSQL or MySQL data models.',
+    benefit: 'Keep application information organized and consistent.',
   },
   {
-    title: 'Website Maintenance', icon: 'maintenance',
-    description: 'Make small content, layout and frontend updates to an existing site.',
-    benefit: 'Keep pages aligned with your current needs.',
-  },
-  {
-    title: 'Bug Fixing', icon: 'bug',
-    description: 'Investigate and address reproducible frontend issues.',
-    benefit: 'Help restore expected behavior for visitors.',
-  },
-  {
-    title: 'Performance Optimization', icon: 'performance',
-    description: 'Review frontend assets and code for practical loading improvements.',
-    benefit: 'Reduce avoidable weight and friction in the browsing experience.',
-  },
-  {
-    title: 'Basic SEO Optimization', icon: 'seo',
-    description: 'Set page titles, descriptions and semantic page structure.',
-    benefit: 'Give search engines and visitors clearer page context.',
-  },
-  {
-    title: 'Website Deployment', icon: 'deployment',
-    description: 'Prepare and publish a frontend project to a suitable hosting platform.',
-    benefit: 'Make your site accessible through a public link.',
-  },
-  {
-    title: 'Figma to React / HTML-CSS', icon: 'figma',
-    description: 'Translate a supplied design into a responsive frontend layout.',
-    benefit: 'Turn design files into a browser-ready interface.',
-  },
-  {
-    title: 'Mobile-Friendly Websites', icon: 'mobile',
-    description: 'Prioritize readable content and touch-friendly layouts on mobile.',
-    benefit: 'Help phone users browse and interact more comfortably.',
+    title: 'Dashboards & Role-Based Portals', icon: 'dashboard',
+    description: 'Focused views for administration, operations and user-specific workflows.',
+    benefit: 'Make important information and actions easier to find.',
   },
 ]

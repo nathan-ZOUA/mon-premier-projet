@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
 
 :root {
   font-family: 'DM Sans', 'Segoe UI', sans-serif;
@@ -13,9 +13,10 @@
   --muted: #747984;
   --paper: #f7f7f3;
   --line: #e3e4df;
-  --accent: #8060a4;
-  --accent-dark: #674987;
+  --accent: #7c8d55;
+  --accent-dark: #586a38;
   --mono: 'DM Mono', Consolas, monospace;
+  --heading: 'Manrope', 'DM Sans', 'Segoe UI', sans-serif;
 
   font-optical-sizing: auto;
   font-weight: 400;
@@ -63,13 +64,13 @@ a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
-  outline: 3px solid #b79bd2;
+  outline: 3px solid #a8bd76;
   outline-offset: 4px;
 }
 
 ::selection {
-  color: #fff;
-  background: #8060a4;
+  color: #20231d;
+  background: #d9edaa;
 }
 
 .skip-link {

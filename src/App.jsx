@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   contact,
   currentlyLearning,
@@ -12,10 +12,10 @@ import './App.css'
 
 const navigation = [
   { href: '#home', label: 'Home' },
+  { href: '#projects', label: 'Projects' },
+  { href: '#services', label: 'Services' },
   { href: '#about', label: 'About' },
   { href: '#skills', label: 'Skills' },
-  { href: '#services', label: 'Services' },
-  { href: '#projects', label: 'Projects' },
   { href: '#contact', label: 'Contact' },
 ]
 
@@ -171,15 +171,18 @@ function CodeVisual() {
       <div className="code-card">
         <div className="code-top"><span /><span /><span /><b>naj.dev</b></div>
         <div className="code-lines">
-          <p><i>01</i><span className="code-purple">const</span> purpose = <span className="code-green">'useful web'</span>;</p>
-          <p><i>02</i></p>
-          <p><i>03</i><span className="code-purple">function</span> <span className="code-yellow">build</span>() {'{'}</p>
-          <p><i>04</i>&nbsp;&nbsp;<span className="code-purple">return</span> <span className="code-green">'with care'</span>;</p>
-          <p><i>05</i>{'}'}</p>
-          <p><i>06</i></p>
-          <p><i>07</i><span className="code-muted">// learn, make, improve</span></p>
+          <p><i>01</i><span className="code-purple">const</span> product = {'{'}</p>
+          <p><i>02</i>&nbsp;&nbsp;ui: <span className="code-green">'React'</span>, api: <span className="code-green">'REST'</span>,</p>
+          <p><i>03</i>&nbsp;&nbsp;data: <span className="code-green">'PostgreSQL'</span></p>
+          <p><i>04</i>{'}'};</p>
+          <p><i>05</i></p>
+          <p><i>06</i><span className="code-purple">function</span> <span className="code-yellow">build</span>(product) {'{'}</p>
+          <p><i>07</i>&nbsp;&nbsp;<span className="code-purple">return</span> product.withCare();</p>
+          <p><i>08</i>{'}'}</p>
+          <p><i>09</i></p>
+          <p><i>10</i><span className="code-muted">// clarity across the stack</span></p>
         </div>
-        <div className="code-footer"><span /> Curious by nature. Building step by step.</div>
+        <div className="code-footer"><span /> Interfaces · APIs · Data</div>
       </div>
       <span className="visual-spark spark-one">✳</span>
       <span className="visual-spark spark-two">✦</span>
@@ -203,34 +206,89 @@ function SkillGroups({ groups }) {
   )
 }
 
-function ProjectCard({ project, index }) {
-  const [imageLoaded, setImageLoaded] = useState(Boolean(project.image))
+function ProjectArtwork({ project }) {
+  const artwork = {
+    transport: (
+      <div className="art-dashboard">
+        <aside><b>SB<span>•</span></b><i /><i /><i /><i /></aside>
+        <div className="art-dashboard-main">
+          <small>FLEET OVERVIEW</small><strong>Transport, in view.</strong>
+          <div className="art-stat-row"><span>Fleet<b>Vehicles</b></span><span>Bookings<b>Requests</b></span><span>Tracking<b>Positions</b></span></div>
+          <div className="art-map">
+            <svg viewBox="0 0 420 100" aria-hidden="true"><path d="M10 77C72 72 54 25 136 34s72 54 127 37 77-32 143-49" /><path d="M14 88c77 5 94-40 155-25s69-16 116-4 80 18 121-15" /></svg>
+            <i /><i /><i />
+          </div>
+        </div>
+      </div>
+    ),
+    commerce: (
+      <div className="art-store">
+        <header><b>VELORA<span>✳</span></b><small>NEW IN&nbsp;&nbsp; OBJECTS&nbsp;&nbsp; STORIES</small><i>♡</i></header>
+        <div className="art-store-body">
+          <div className="art-store-copy"><small>THE EVERYDAY EDIT</small><strong>Good things,<br /><em>chosen well.</em></strong><span>Explore the collection ↗</span></div>
+          <div className="art-store-products"><i /><i /><i /></div>
+        </div>
+        <footer>CURATED OBJECTS <span>Browse the collection</span></footer>
+      </div>
+    ),
+    education: (
+      <div className="art-learning">
+        <header><b>edu<span>core</span></b><small>LEARNING SPACE</small><i>◉</i></header>
+        <div className="art-learning-body"><aside><i /><i /><i /><i /></aside><div><small>YOUR LEARNING SPACE</small><strong>Keep moving<br />forward.</strong><div className="art-courses"><i /><i /><i /></div><span /><span /></div><aside className="art-agenda"><small>UP NEXT</small><i /><i /><i /></aside></div>
+      </div>
+    ),
+    business: (
+      <div className="art-business">
+        <header><b>NOVA<span>®</span></b><small>ABOUT&nbsp;&nbsp; SERVICES&nbsp;&nbsp; CONTACT</small><i>↗</i></header>
+        <div><small>INDEPENDENT DIGITAL STUDIO CONCEPT</small><strong>Ideas into<br /><em>useful digital.</em></strong><span>Thoughtful websites for modern businesses.</span></div>
+        <i className="art-orbit" />
+      </div>
+    ),
+    restaurant: (
+      <div className="art-restaurant">
+        <header><b>SAVANNA</b><small>MENU&nbsp;&nbsp; OUR STORY&nbsp;&nbsp; VISIT</small><i>BOOK A TABLE ↗</i></header>
+        <div><small>A DINING CONCEPT</small><strong>Gather<br />around.</strong><span>Good food. Easy company.</span></div><i className="art-plate"><b /></i>
+      </div>
+    ),
+  }
 
   return (
-    <article className="project-card">
+    <div className={`project-art project-art--${project.visual}`} role="img" aria-label={`Illustrative interface preview for ${project.title}`}>
+      <div className="art-browser"><div className="art-browser-bar"><i /><i /><i /><span>{project.id}.app / preview</span></div>{artwork[project.visual]}</div>
+      <span className="art-caption">INTERFACE STUDY · {project.category.toUpperCase()}</span>
+    </div>
+  )
+}
+
+function ProjectCard({ project, onViewDetails }) {
+  const [imageLoaded, setImageLoaded] = useState(Boolean(project.image))
+  const projectUrl = project.liveUrl || project.githubUrl
+  const preview = imageLoaded ? (
+    <img
+      src={project.image}
+      alt={project.imageAlt || `${project.title} project preview`}
+      loading="lazy"
+      onError={() => setImageLoaded(false)}
+    />
+  ) : (
+    <ProjectArtwork project={project} />
+  )
+
+  return (
+    <article className={`project-card ${project.featured ? 'project-card--featured' : 'project-card--concept'} project-card--${project.id}`}>
       <div className="project-image">
-        {imageLoaded ? (
-          <img
-            src={project.image}
-            alt={`${project.title} project preview`}
-            loading="lazy"
-            onError={() => setImageLoaded(false)}
-          />
+        {projectUrl ? (
+          <a className="project-preview-link" href={projectUrl} target="_blank" rel="noreferrer" aria-label={`Open ${project.title} ${project.liveUrl ? 'live website' : 'GitHub repository'}`}>
+            {preview}<span>{project.liveUrl ? 'Open live project' : 'View source on GitHub'} <ArrowIcon diagonal /></span>
+          </a>
         ) : (
-          <div className={`project-art project-art-${index % 3}`} aria-hidden="true">
-            <span className="art-window"><i /><i /><i /></span>
-            <span className="art-panel" />
-          </div>
+          preview
         )}
       </div>
       <div className="project-content">
+        <div className="project-meta"><span>{project.category}</span><span>{project.projectType}</span></div>
         <div className="project-title-row">
-          <h3>{project.title}</h3>
-          {project.liveUrl && (
-            <a className="icon-link" href={project.liveUrl} target="_blank" rel="noreferrer" aria-label={`Open the live demo of ${project.title}`}>
-              <ArrowIcon diagonal />
-            </a>
-          )}
+          <h3>{projectUrl ? <a href={projectUrl} target="_blank" rel="noreferrer" aria-label={`Open ${project.title} ${project.liveUrl ? 'live website' : 'GitHub repository'}`}>{project.title}</a> : project.title}</h3>
         </div>
         <p>{project.description}</p>
         {project.keyFeatures?.length > 0 && (
@@ -242,11 +300,55 @@ function ProjectCard({ project, index }) {
           {project.technologies.map((technology) => <li key={technology}>{technology}</li>)}
         </ul>
         <div className="project-links">
+          <button className="project-detail-link" type="button" onClick={() => onViewDetails(project)}>View case study <ArrowIcon /></button>
           {project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noreferrer">Live Demo <ArrowIcon diagonal /></a>}
           {project.githubUrl && <a href={project.githubUrl} target="_blank" rel="noreferrer">GitHub <ArrowIcon diagonal /></a>}
         </div>
       </div>
     </article>
+  )
+}
+
+function ProjectDetailsDialog({ project, onClose }) {
+  const dialogRef = useRef(null)
+
+  useEffect(() => {
+    const dialog = dialogRef.current
+    if (!dialog) return
+    if (project && !dialog.open) dialog.showModal()
+    if (!project && dialog.open) dialog.close()
+  }, [project])
+
+  return (
+    <dialog
+      ref={dialogRef}
+      className="project-dialog"
+      aria-labelledby={project ? 'project-dialog-title' : undefined}
+      onClose={onClose}
+      onClick={(event) => {
+        if (event.target === dialogRef.current) dialogRef.current.close()
+      }}
+    >
+      <button className="dialog-close" type="button" aria-label="Close project details" onClick={() => dialogRef.current?.close()}>×</button>
+      {project && (
+        <div className="dialog-content">
+          <p className="eyebrow">{project.category} <span>· CASE STUDY</span></p>
+          <h2 id="project-dialog-title">{project.title}</h2>
+          <p className="dialog-summary">{project.description}</p>
+          <div className="dialog-columns">
+            <section><h3>Objective</h3><p>{project.objective}</p><h3>Solution</h3><p>{project.solution}</p></section>
+            <section><h3>Implemented scope</h3><ul>{project.keyFeatures.map((feature) => <li key={feature}>{feature}</li>)}</ul><h3>Architecture</h3><p>{project.architecture}</p></section>
+          </div>
+          <ul className="tag-list dialog-tags" aria-label="Technologies used">{project.technologies.map((technology) => <li key={technology}>{technology}</li>)}</ul>
+          {project.note && <p className="dialog-note">{project.note}</p>}
+          <div className="dialog-links">
+            {project.liveUrl && <a className="button button-primary" href={project.liveUrl} target="_blank" rel="noreferrer">Open live project <ArrowIcon diagonal /></a>}
+            {project.githubUrl && <a className="button button-secondary" href={project.githubUrl} target="_blank" rel="noreferrer">View source on GitHub <ArrowIcon diagonal /></a>}
+            {!project.liveUrl && !project.githubUrl && <p className="dialog-note">No public demo or source repository is linked for this project.</p>}
+          </div>
+        </div>
+      )}
+    </dialog>
   )
 }
 
@@ -274,6 +376,8 @@ function ContactForm() {
 }
 
 function App() {
+  const [selectedProject, setSelectedProject] = useState(null)
+
   return (
     <>
       <a className="skip-link" href="#main">Skip to content</a>
@@ -282,11 +386,11 @@ function App() {
         <section className="hero-section" id="home" aria-labelledby="hero-title">
           <div className="container hero-layout">
             <div className="hero-copy">
-              <p className="eyebrow"><span className="status-dot" /> Web development · always learning</p>
+              <p className="eyebrow"><span className="status-dot" /> Full-stack web developer · digital products</p>
               <h1 id="hero-title">{personalInfo.title}<span className="hero-period">.</span></h1>
               <p className="hero-description">{personalInfo.positioning}</p>
               <div className="hero-actions">
-                <a className="button button-primary" href="#projects">View My Projects <ArrowIcon /></a>
+                <a className="button button-primary" href="#projects">View Selected Work <ArrowIcon /></a>
                 <a className="button button-secondary" href="#contact">Let&apos;s Work Together</a>
               </div>
               <SocialLinks className="hero-socials" />
@@ -296,9 +400,22 @@ function App() {
           <a className="scroll-cue" href="#about"><span /> Scroll to explore</a>
         </section>
 
+        <section className="section projects-section" id="projects" aria-labelledby="projects-title">
+          <div className="container">
+            <div className="section-heading-row">
+              <SectionHeading eyebrow="01 — Selected work" title="Products built around real workflows." titleId="projects-title">
+                A selection of full-stack applications and interface projects. Descriptions reflect implemented features; concepts and unfinished work are identified clearly.
+              </SectionHeading>
+              {contact.github && <a className="text-link all-projects" href={contact.github} target="_blank" rel="noreferrer">More on GitHub <ArrowIcon diagonal /></a>}
+            </div>
+            <div className="projects-grid">{projects.map((project) => <ProjectCard key={project.id} project={project} onViewDetails={setSelectedProject} />)}</div>
+            <p className="projects-note">Interface artwork is illustrative rather than a screenshot. No client results or business metrics are implied.</p>
+          </div>
+        </section>
+
         <section className="section about-section" id="about" aria-labelledby="about-title">
           <div className="container about-layout">
-            <SectionHeading eyebrow="01 — About" title="Thoughtful work, built with curiosity." titleId="about-title" />
+            <SectionHeading eyebrow="02 — About" title="Thoughtful work, built with curiosity." titleId="about-title" />
             <div className="about-copy">
               <p>Hi, I&apos;m <strong>{personalInfo.fullName}, also known as {personalInfo.brandName}</strong>, a {personalInfo.title} focused on building modern, responsive and user-friendly digital experiences.</p>
               <p>{personalInfo.about}</p>
@@ -309,15 +426,15 @@ function App() {
 
         <section className="section skills-section" id="skills" aria-labelledby="skills-title">
           <div className="container">
-            <SectionHeading eyebrow="02 — Skills" title="A growing toolkit." titleId="skills-title">
-              I keep building a solid foundation and learning new tools at a steady pace.
+            <SectionHeading eyebrow="03 — Skills" title="A practical full-stack toolkit." titleId="skills-title">
+              Technologies represented in my projects, with areas I am continuing to develop listed separately.
             </SectionHeading>
             <div className="skills-block">
-              <div className="skills-label"><h3>Skills</h3><p>Technologies and practices listed in my current profile.</p></div>
+              <div className="skills-label"><h3>Project stack</h3><p>Tools used across the applications shown here.</p></div>
               <SkillGroups groups={skills} />
             </div>
             <div className="skills-block learning-block">
-              <div className="skills-label"><h3>Currently Learning</h3><p>Areas I am exploring and developing further.</p></div>
+              <div className="skills-label"><h3>Currently exploring</h3><p>Skills I am actively working to strengthen.</p></div>
               <SkillGroups groups={currentlyLearning} />
             </div>
           </div>
@@ -325,8 +442,8 @@ function App() {
 
         <section className="section services-section" id="services" aria-labelledby="services-title">
           <div className="container">
-            <SectionHeading eyebrow="03 — Services" title="Practical help for your next web project." titleId="services-title">
-              Clear, focused frontend support for common website and web application needs.
+            <SectionHeading eyebrow="04 — Services" title="From interface to the systems behind it." titleId="services-title">
+              Practical web development across the layers that make an application useful and understandable.
             </SectionHeading>
             <div className="services-grid">
               {services.map((service) => (
@@ -339,25 +456,6 @@ function App() {
               ))}
             </div>
             <div className="service-cta"><div><span className="eyebrow">Have something in mind?</span><p>Let&apos;s talk through what you need.</p></div><a className="button button-dark" href="#contact">Let&apos;s Talk <ArrowIcon /></a></div>
-          </div>
-        </section>
-
-        <section className="section projects-section" id="projects" aria-labelledby="projects-title">
-          <div className="container">
-            <div className="section-heading-row">
-              <SectionHeading eyebrow="04 — Projects" title="Selected work." titleId="projects-title">
-                A place for real projects, experiments and things I have built.
-              </SectionHeading>
-              {contact.github && <a className="text-link all-projects" href={contact.github} target="_blank" rel="noreferrer">More on GitHub <ArrowIcon diagonal /></a>}
-            </div>
-            {projects.length > 0 ? (
-              <div className="projects-grid">{projects.map((project, index) => <ProjectCard key={project.title} project={project} index={index} />)}</div>
-            ) : (
-              <article className="projects-empty">
-                <div className="empty-art" aria-hidden="true"><span>&lt;/&gt;</span><i /><i /></div>
-                <div><span className="empty-kicker">PORTFOLIO IN PROGRESS</span><h3>Project coming soon</h3><p>This space is ready for a real project. Check back as I add work I can share.</p><p className="empty-hint">Add project details in <code>src/data/portfolio.js</code>.</p></div>
-              </article>
-            )}
           </div>
         </section>
 
@@ -377,6 +475,7 @@ function App() {
           </div>
         </section>
       </main>
+      <ProjectDetailsDialog project={selectedProject} onClose={() => setSelectedProject(null)} />
       <footer className="site-footer">
         <div className="container footer-inner">
           <a className="brand" href="#home">{personalInfo.brandName.toLowerCase()}<span>.</span></a>

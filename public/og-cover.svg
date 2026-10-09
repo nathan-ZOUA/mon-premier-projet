@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f5f6f0"/>
+  <circle cx="935" cy="315" r="244" fill="#e9eddf"/>
+  <circle cx="935" cy="315" r="184" fill="none" stroke="#cbd3bd" stroke-width="2"/>
+  <circle cx="935" cy="315" r="123" fill="none" stroke="#b5c19f" stroke-width="2" stroke-dasharray="5 9"/>
+  <circle cx="935" cy="315" r="69" fill="#fafbf6" stroke="#b9c3aa" stroke-width="2"/>
+  <text x="935" y="334" text-anchor="middle" fill="#242820" font-family="Arial,sans-serif" font-size="54" font-weight="700">N<tspan fill="#91a95e">.</tspan></text>
+  <text x="90" y="205" fill="#647052" font-family="monospace" font-size="18" letter-spacing="3">FULL-STACK WEB DEVELOPER</text>
+  <text x="90" y="305" fill="#242820" font-family="Arial,sans-serif" font-size="76" font-weight="700" letter-spacing="-4">Nathan Zoua</text>
+  <text x="90" y="375" fill="#72796a" font-family="Arial,sans-serif" font-size="38">Building useful things for the web.</text>
+  <rect x="90" y="430" width="52" height="5" fill="#d1ed85"/>
+</svg>
